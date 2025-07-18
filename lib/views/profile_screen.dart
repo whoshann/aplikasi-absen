@@ -192,6 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       onPressed: () async {
                                         // Implementasi logout
                                         await TokenHelper.removeToken();
+                                        StudentService.clearCache();
                                         Get.off(() => LoginScreen());
                                       },
                                       icon: Icon(

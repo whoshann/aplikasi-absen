@@ -12,6 +12,10 @@ class StudentService {
 
   static Student? get currentStudent => _currentStudent;
 
+  static void clearCache() {
+    _currentStudent = null;
+  }
+
   Future<Student> getCurrentStudent() async {
     if (_currentStudent != null) return _currentStudent!;
 

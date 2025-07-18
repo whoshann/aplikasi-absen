@@ -4,6 +4,7 @@ import 'package:student_absence/views/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:student_absence/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:student_absence/services/student_service.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _clearToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('access_token');
+    StudentService.clearCache();
   }
 
   Future<void> _handleLogin() async {

@@ -636,44 +636,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.error_outline, color: Colors.red),
+              Icon(Icons.info_outline, color: Colors.red),
               SizedBox(width: 8),
               Text(
-                'Terjadi kesalahan',
+                'Belum ada riwayat absensi',
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: isSmallScreen ? 16 : 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.red[700],
+                  color: Colors.red,
                 ),
               ),
             ],
           ),
           SizedBox(height: 8),
           Text(
-            'Tidak dapat memuat data riwayat absensi.',
+            'Anda belum memiliki data riwayat absensi. Silakan lakukan absensi terlebih dahulu.',
             style: GoogleFonts.plusJakartaSans(
               fontSize: isSmallScreen ? 13 : 14,
-              color: Colors.red[700],
-            ),
-          ),
-          SizedBox(height: 12),
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: _loadData,
-              label: Text(
-                'Muat Ulang',
-                style: GoogleFonts.plusJakartaSans(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red[700],
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
+              color: Colors.red,
             ),
           ),
         ],

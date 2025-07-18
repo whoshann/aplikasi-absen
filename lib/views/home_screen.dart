@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
 
   Map<String, int> monthNumbers = {
+    'Semua Data': 0, 
     'Januari': 1,
     'Februari': 2,
     'Maret': 3,
@@ -78,9 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Set bulan default menjadi bulan saat ini
-    final currentMonth = DateTime.now().month;
-    selectedMonth = getMonthName(currentMonth);
+    // Set default ke 'Semua Data'
+    selectedMonth = 'Semua Data';
     _loadData();
   }
 
@@ -94,13 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final student = await _studentService.getCurrentStudent();
       final currentYear = DateTime.now().year;
-      final selectedMonthNumber = monthNumbers[selectedMonth] ?? 1;
+      final selectedMonthNumber = monthNumbers[selectedMonth] ?? 0;
 
-      // Menggunakan method getStatistics yang baru
+      // Jika 'Semua Data' dipilih, jangan filter bulan
       final statistics = await _absenceService.getStatistics(
         student.id,
-        year: currentYear,
-        month: selectedMonthNumber,
+        year: selectedMonthNumber == 0 ? null : currentYear,
+        month: selectedMonthNumber == 0 ? null : selectedMonthNumber,
       );
 
       if (mounted) {

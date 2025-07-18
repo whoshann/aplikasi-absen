@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_absence/views/onboarding_screen.dart';
+import 'package:student_absence/utils/token_helper.dart';
+import 'package:student_absence/views/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,10 +13,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Menggunakan GetX untuk navigasi setelah 3 detik
-    Future.delayed(Duration(seconds: 3), () {
-      Get.off(() => OnboardingScreen());
-    });
+    _checkAuthAndNavigate();
+  }
+
+  Future<void> _checkAuthAndNavigate() async {
+    await Future.delayed(Duration(seconds: 2)); 
+
+    final token = await TokenHelper.getToken();
+    if (token != null) {
+      final isValid = await TokenHelper.validateToken();
+      if (isValid) {
+        Get.off(() => HomeScreen());
+        return;
+      }
+    }
+    Get.off(() => OnboardingScreen());
   }
 
   @override
